@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2/promise');
+const validator = require('validator');
 require('dotenv').config();
 
 const SECRET = process.env.JWT_SECRET;
@@ -19,6 +20,10 @@ const db = mysql.createPool({
 // Register Route
 router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
+  
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({ message: 'Invalid email address.' });
+  }
 
   try {
     // Check if the user already exists

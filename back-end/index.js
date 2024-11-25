@@ -1,9 +1,10 @@
 const express = require('express');
-const { setupDatabase } = require('./setupDatabase'); 
+const path = require('path'); // For serving static files
+const { setupDatabase } = require('./setupDatabase');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); // Parse incoming JSON requests
 
 const startServer = async () => {
   try {
@@ -11,16 +12,21 @@ const startServer = async () => {
     await setupDatabase();
     console.log('Database setup complete.');
 
-    // Add routes
+    // Add routes for APIs
     app.use('/auth', authRoutes);
 
-    app.get('/', (req, res) => {
-      res.send('Hello, World!');
+    // Serve the React front-end from the "dist" folder
+    app.use(express.static(path.join(__dirname, 'dist')));
+
+    // Fallback for React routing (handles SPA routing)
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
     });
 
     // Start the server
-    app.listen(3000, () => {
-      console.log('Server is running on port 3000');
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
   } catch (err) {
     console.error('Failed to set up the database:', err);
