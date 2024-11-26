@@ -44,7 +44,7 @@ const AuthPopup = ({ onClose }) => {
           {currentView !== "register" && (
             <button onClick={() => setCurrentView("register")}>Register</button>
           )}
-          {currentView !== "forgot" && (
+          {currentView !== "register" && currentView !== "forgot" && (
             <button onClick={() => setCurrentView("forgot")}>
               Forgot Password
             </button>

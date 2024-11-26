@@ -25,7 +25,7 @@ const ForgotPasswordForm = ({ onReset }) => {
       // Show success message
       setSuccessMessage("Reset email sent successfully. Please check your inbox.");
       setErrorMessage("");
-
+ 
       // Notify parent and redirect to ResetPasswordForm
       setTimeout(() => {
         onReset(email); // Pass email to `AuthPopup` to switch views

@@ -112,11 +112,11 @@ router.post('/forgot-password', async (req, res) => {
       subject: 'Password Reset',
       text: `Here is your password reset code: ${token}\nThis code will expire in 1 hour.`,
     };
-
+ 
     try {
       await transporter.sendMail(mailOptions);
       console.log("Email sent successfully!");
-      return res.send({ message: "Password reset token sent successfully!" });
+      return res.send({ message: "Password reset token sent successfully to your email!" });
     } catch (emailErr) {
       console.error("Error sending email:", emailErr);
       return res.status(500).send({ message: "Failed to send reset email" });
