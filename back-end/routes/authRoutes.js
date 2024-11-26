@@ -97,17 +97,17 @@ router.post('/forgot-password', async (req, res) => {
 
     // Send the token to the user's email (via nodemailer)
     const transporter = nodemailer.createTransport({
-      host: 'smtp.office365.com',
-      port: 587,
-      secure: false,
+      host: process.env.SMTP_HOST,
+      port: 465,
+      secure: true, // Use secure for port 465
       auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS, 
+        pass: process.env.SMTP_PASS,
       },
     });
 
     const mailOptions = {
-      from: process.env.SMTP_USER,
+      from: process.env.EMAIL_FROM,
       to: email,
       subject: 'Password Reset',
       text: `Here is your password reset code: ${token}\nThis code will expire in 1 hour.`,
