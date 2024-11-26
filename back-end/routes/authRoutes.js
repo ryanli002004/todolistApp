@@ -113,14 +113,20 @@ router.post('/forgot-password', async (req, res) => {
       text: `Here is your password reset code: ${token}\nThis code will expire in 1 hour.`,
     };
 
-    await transporter.sendMail(mailOptions);
-
-    res.send({ message: 'Password reset token sent to email' });
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log("Email sent successfully!");
+      return res.send({ message: "Password reset token sent successfully!" });
+    } catch (emailErr) {
+      console.error("Error sending email:", emailErr);
+      return res.status(500).send({ message: "Failed to send reset email" });
+    }
   } catch (err) {
-    console.error(err);
-    res.status(500).send({ message: 'Server error' });
+    console.error("Error in forgot-password route:", err);
+    return res.status(500).send({ message: "Server error" });
   }
 });
+
 
 // Reset Password Route
 router.post('/reset-password', async (req, res) => {

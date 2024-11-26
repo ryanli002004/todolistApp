@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-const ResetPassword = ({ email }) => {
-  const [token, setToken] = useState(""); // One-time token
-  const [newPassword, setNewPassword] = useState(""); // New password
-  const [successMessage, setSuccessMessage] = useState(""); // Message for success
-  const [errorMessage, setErrorMessage] = useState(""); // Message for errors
+const ResetPasswordForm = ({ email, successMessage }) => {
+  const [token, setToken] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleResetPassword = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -18,31 +17,27 @@ const ResetPassword = ({ email }) => {
         body: JSON.stringify({ email, token, newPassword }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message || "Something went wrong.");
+        const data = await response.json();
+        throw new Error(data.message || "Failed to reset password.");
       }
 
-      setSuccessMessage("Your password has been reset successfully!");
-      setErrorMessage("");
-    } catch (error) {
-      setErrorMessage(error.message);
-      setSuccessMessage("");
+      alert("Password reset successfully!");
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   return (
-    <form onSubmit={handleResetPassword}>
+    <form onSubmit={handleSubmit}>
       <h2>Reset Password</h2>
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <label>
         Email:
         <input type="email" value={email} readOnly />
       </label>
-
       <label>
         Token:
         <input
@@ -52,7 +47,6 @@ const ResetPassword = ({ email }) => {
           required
         />
       </label>
-
       <label>
         New Password:
         <input
@@ -68,4 +62,4 @@ const ResetPassword = ({ email }) => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordForm;

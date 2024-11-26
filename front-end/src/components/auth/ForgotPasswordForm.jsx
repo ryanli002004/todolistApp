@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
-const ForgotPasswordForm = ({ switchPage }) => {
+const ForgotPasswordForm = ({ onReset }) => {
   const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
+
     try {
       const response = await fetch("http://localhost:3000/auth/forgot-password", {
         method: "POST",
@@ -13,32 +16,43 @@ const ForgotPasswordForm = ({ switchPage }) => {
         },
         body: JSON.stringify({ email }),
       });
-      const data = await response.json();
-      if (response.ok) {
-        alert("Password reset link sent!");
-        switchPage("login");
-      } else {
-        alert(data.message || "Request failed");
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Something went wrong.");
       }
+
+      // Show success message
+      setSuccessMessage("Reset email sent successfully. Please check your inbox.");
+      setErrorMessage("");
+
+      // Notify parent and redirect to ResetPasswordForm
+      setTimeout(() => {
+        onReset(email); // Pass email to `AuthPopup` to switch views
+      }, 2000); // Slight delay for UX
     } catch (error) {
-      console.error("Error during forgot password:", error);
+      setErrorMessage(error.message);
+      setSuccessMessage("");
     }
   };
 
   return (
-    <form className="auth-form" onSubmit={handleForgotPassword}>
+    <form onSubmit={handleForgotPassword}>
       <h2>Forgot Password</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <button type="submit">Reset Password</button>
-      <p>
-        Back to <span onClick={() => switchPage("login")}>Login</span>
-      </p>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+
+      <label>
+        Email:
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </label>
+
+      <button type="submit">Send Reset Email</button>
     </form>
   );
 };
