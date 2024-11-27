@@ -21,6 +21,10 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ message: 'Invalid email address.' });
   }
 
+  if (password.length < 5) {
+    return res.status(400).json({ message: "Password must be at least 5 characters long." });
+  }
+
   try {
     // Check if the user already exists
     const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);

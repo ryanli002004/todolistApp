@@ -9,11 +9,15 @@ const RegisterForm = ({ onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
       return;
+    }
+  
+    if (password.length < 5) {
+      setError("Password must be at least 5 characters long."); 
+      return; 
     }
 
     try {
@@ -31,7 +35,7 @@ const RegisterForm = ({ onSuccess }) => {
         throw new Error(data.message || "Registration failed");
       }
 
-      alert("Registration successful! Please log in."); // Inform the user
+      alert("Registration successful! Please log in.");
       onSuccess()
     } catch (err) {
       setError(err.message);
