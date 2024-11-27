@@ -85,9 +85,23 @@ router.post('/forgot-password', async (req, res) => {
       return res.status(404).send({ message: 'Email not registered' });
     }
 
+    const [existingTokens] = await db.query('SELECT expires_at FROM password_resets WHERE email = ?', [email]);
+    if (existingTokens.length > 0) {
+      const { expires_at } = existingTokens[0];
+      const now = new Date();
+
+      // Check if the token was created within the last 30 minutes
+      if (new Date(expires_at) > now) {
+        const remainingMinutes = Math.ceil((new Date(expires_at) - now) / (60 * 1000));
+        return res.status(429).send({
+          message: `You must wait ${remainingMinutes} minutes before requesting another token.`,
+        });
+      }
+    }
+
     // Generate a secure random token
     const token = crypto.randomBytes(20).toString('hex');
-    const expires_at = new Date(Date.now() + 60 * 60 * 1000); // Token expires in 1 hour
+    const expires_at = new Date(Date.now() + 30 * 60 * 1000); // Token expires in 30min
 
     // Insert or update the token in the `password_resets` table
     await db.query(
@@ -110,13 +124,13 @@ router.post('/forgot-password', async (req, res) => {
       from: process.env.EMAIL_FROM,
       to: email,
       subject: 'Password Reset',
-      text: `Here is your password reset code: ${token}\nThis code will expire in 1 hour.`,
+      text: `Here is your password reset code: ${token}\nThis code will expire in 30min.`,
     };
  
     try {
       await transporter.sendMail(mailOptions);
       console.log("Email sent successfully!");
-      return res.send({ message: "Password reset token sent successfully to your email!" });
+      return res.status(204).end();
     } catch (emailErr) {
       console.error("Error sending email:", emailErr);
       return res.status(500).send({ message: "Failed to send reset email" });

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 
-const ResetPasswordForm = ({ email, successMessage }) => {
+const ResetPasswordForm = ({ email }) => {
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState(
+    "Password reset token sent successfully to your email!"
+  );
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

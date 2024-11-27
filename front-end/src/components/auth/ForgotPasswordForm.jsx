@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const ForgotPasswordForm = ({ onReset }) => {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
@@ -23,16 +22,12 @@ const ForgotPasswordForm = ({ onReset }) => {
       }
 
       // Show success message
-      setSuccessMessage("Reset email sent successfully. Please check your inbox.");
       setErrorMessage("");
  
       // Notify parent and redirect to ResetPasswordForm
-      setTimeout(() => {
-        onReset(email); // Pass email to `AuthPopup` to switch views
-      }, 2000); // Slight delay for UX
+      onReset(email); // Pass email to `AuthPopup` to switch views
     } catch (error) {
       setErrorMessage(error.message);
-      setSuccessMessage("");
     }
   };
 
@@ -40,7 +35,6 @@ const ForgotPasswordForm = ({ onReset }) => {
     <form onSubmit={handleForgotPassword}>
       <h2>Forgot Password</h2>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
 
       <label>
         Email:
