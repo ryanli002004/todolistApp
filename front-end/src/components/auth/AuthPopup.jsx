@@ -29,7 +29,7 @@ const AuthPopup = ({ onClose }) => {
           <LoginForm onSuccess={handleSuccess} />
         )}
         {currentView === "register" && (
-          <RegisterForm onSuccess={handleSuccess} />
+          <RegisterForm onSuccess={switchToLogin} />
         )}
         {currentView === "forgot" && (
           <ForgotPasswordForm onReset={handleForgotPassword} />

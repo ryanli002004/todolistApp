@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const RegisterForm = ({ onSuccess, onSwitchView }) => {
+const RegisterForm = ({ onSuccess }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ const RegisterForm = ({ onSuccess, onSwitchView }) => {
       }
 
       alert("Registration successful! Please log in."); // Inform the user
-      onSwitchView("login"); // Switch to the login page
+      onSuccess()
     } catch (err) {
       setError(err.message);
     }
