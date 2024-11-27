@@ -4,14 +4,9 @@ import RegisterForm from "./RegisterForm";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import ResetPasswordForm from "./ResetPasswordForm";
 
-const AuthPopup = ({ onClose }) => {
+const AuthPopup = ({ onSuccess }) => {
   const [currentView, setCurrentView] = useState("login"); // 'login', 'register', 'forgot', or 'reset'
   const [emailForReset, setEmailForReset] = useState(""); // Store email for reset password view
-
-  const handleSuccess = (token) => {
-    console.log("User authenticated successfully, token:", token);
-    onClose(); // Close the popup on success
-  };
 
   const handleForgotPassword = (email) => {
     setEmailForReset(email); // Save the email for the reset password view
@@ -26,7 +21,7 @@ const AuthPopup = ({ onClose }) => {
     <div className="auth-popup">
       <div className="popup-content">
         {currentView === "login" && (
-          <LoginForm onSuccess={handleSuccess} />
+          <LoginForm onSuccess={onSuccess} /> 
         )}
         {currentView === "register" && (
           <RegisterForm onSuccess={switchToLogin} />

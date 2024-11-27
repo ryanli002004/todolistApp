@@ -117,7 +117,7 @@ router.post('/forgot-password', async (req, res) => {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: 465,
-      secure: true, // Use secure for port 465
+      secure: true, 
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -173,6 +173,22 @@ router.post('/reset-password', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send({ message: 'Server error' });
+  }
+});
+
+router.post("/verify-token", (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1]; 
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  try {
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); 
+    res.json({ id: decoded.id, email: decoded.email, name: decoded.name }); 
+  } catch (err) {
+    console.error("Token verification error:", err);
+    return res.status(401).json({ message: "Invalid or expired token" });
   }
 });
 

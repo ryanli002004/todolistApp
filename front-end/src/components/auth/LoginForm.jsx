@@ -22,8 +22,8 @@ const LoginForm = ({ onSuccess }) => {
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
-
-      onSuccess(data.token); // Pass the token to parent for further handling
+      localStorage.setItem("authToken", data.token);
+      onSuccess(data.token, data.name); // Pass the token to parent for further handling
     } catch (err) {
       setError(err.message);
     }
