@@ -18,6 +18,10 @@ const AuthPopup = ({ onClose }) => {
     setCurrentView("reset"); // Switch to the reset password form
   };
 
+  const switchToLogin = () => {
+    setCurrentView("login"); // Redirect to login form
+  };
+
   return (
     <div className="auth-popup">
       <div className="popup-content">
@@ -31,7 +35,7 @@ const AuthPopup = ({ onClose }) => {
           <ForgotPasswordForm onReset={handleForgotPassword} />
         )}
         {currentView === "reset" && (
-          <ResetPasswordForm email={emailForReset}/>
+          <ResetPasswordForm email={emailForReset} onSuccess={switchToLogin} />
         )}
 
         {/* Buttons for switching views */}

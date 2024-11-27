@@ -91,12 +91,12 @@ router.post('/forgot-password', async (req, res) => {
       const now = new Date();
 
       // Check if the token was created within the last 30 minutes
-      if (new Date(expires_at) > now) {
+      /*if (new Date(expires_at) > now) {
         const remainingMinutes = Math.ceil((new Date(expires_at) - now) / (60 * 1000));
         return res.status(429).send({
           message: `You must wait ${remainingMinutes} minutes before requesting another token.`,
         });
-      }
+      }*/
     }
 
     // Generate a secure random token

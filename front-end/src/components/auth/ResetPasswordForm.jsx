@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ResetPasswordForm = ({ email }) => {
+const ResetPasswordForm = ({ email, onSuccess }) => {
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,6 +27,7 @@ const ResetPasswordForm = ({ email }) => {
       }
 
       alert("Password reset successfully!");
+      onSuccess()
     } catch (err) {
       setError(err.message);
     }
