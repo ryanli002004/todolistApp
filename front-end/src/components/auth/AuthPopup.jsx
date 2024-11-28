@@ -3,6 +3,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import ResetPasswordForm from "./ResetPasswordForm";
+import "./AuthPopup.css";
 
 const AuthPopup = ({ onSuccess }) => {
   const [currentView, setCurrentView] = useState("login"); // 'login', 'register', 'forgot', or 'reset'

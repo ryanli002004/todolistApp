@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AuthPopup from "./components/auth/AuthPopup";
 import LogoutButton from "./components/logout-button/LogoutButton";
+import "./App.css";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,16 +47,22 @@ const App = () => {
   };
 
   return (
-    <div>
-      <header>
+    <div className="app-container" >
         {isAuthenticated ? (
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <h1>Hi {userName}, Welcome to your To-Do List!</h1>
-            <LogoutButton onLogout={handleLogout} />
-          </div>
-        ) : (
           <div>
-            <h1>Welcome to the To-Do List App</h1>
+            <header className="header-container">
+              <h1 className="header-title">Hi {userName}, Welcome to your To-Do List!</h1>
+              <LogoutButton onLogout={handleLogout} />
+            </header>
+            
+          </div>
+        ) 
+        : 
+        (
+          <div>
+            <header className="header-container">
+              <h1 className="header-title">Welcome to the To-Do List App</h1>
+            </header>
             <AuthPopup
               onSuccess={(token, name) => {
                 localStorage.setItem("authToken", token); // Save token
@@ -65,7 +72,6 @@ const App = () => {
             />
           </div>
         )}
-      </header>
     </div>
   );
 };

@@ -1,0 +1,25 @@
+.app-container {
+    font-family: Arial, sans-serif;
+    min-height: 100vh; /* Full height for the app */
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa; /* Optional background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-title {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+ 
