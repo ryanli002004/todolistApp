@@ -49,27 +49,24 @@ const App = () => {
   return (
     <div className="app-container" >
         {isAuthenticated ? (
-          <div>
-            <header className="header-container">
+          <div className="is-auth">
+            <header className="navbar-is-auth">
               <h1 className="header-title">Hi {userName}, Welcome to your To-Do List!</h1>
               <LogoutButton onLogout={handleLogout} />
             </header>
-            
           </div>
         ) 
         : 
         (
-          <div>
-            <header className="header-container">
+          <div className="not-auth">
+            <header className="navbar-not-auth">
               <h1 className="header-title">Welcome to the To-Do List App</h1>
             </header>
             <AuthPopup
               onSuccess={(token, name) => {
                 localStorage.setItem("authToken", token); // Save token
                 setIsAuthenticated(true);
-                setUserName(name);
-              }}
-            />
+                setUserName(name);}}/>
           </div>
         )}
     </div>

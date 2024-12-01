@@ -9,17 +9,41 @@
     text-align: center;
   }
   
-  .header-container {
+  .navbar-not-auth {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+    justify-content: center; /* Spread the items across the navbar */
+    align-items: center; /* Center items vertically */
+    padding: 16px;
     background-color: #f8f9fa; /* Optional background */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Make the navbar fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the screen */
+    z-index: 1000; /* Ensure it stays above other elements */
+    height: 35px;
+  }
+
+  .navbar-is-auth {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Align items vertically */
+    padding: 16px; /* Make the navbar visually appealing */
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fix the navbar at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make it full-width */
+    z-index: 1000; /* Ensure it stays above other elements */
+    height: 35px; /* Consistent height for the navbar */
   }
   
   .header-title {
+    position: absolute; /* Absolutely position the title */
+    left: 50%; /* Start at the horizontal center */
+    transform: translateX(-50%); /* Shift back to center properly */
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Set a readable font size */
   }
- 
+  

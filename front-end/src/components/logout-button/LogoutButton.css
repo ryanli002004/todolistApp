@@ -1,19 +1,24 @@
+
 .logout-button {
-    background-color: #ff4b5c;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .logout-button:hover {
-    background-color: #e84150;
-  }
-  
-  .logout-button:active {
-    background-color: #c4353f;
-  }
-  
+  position: absolute; /* Absolutely position the button */
+  right: 40px; /* Add spacing from the right edge */
+  top: 50%; /* Align vertically with the navbar */
+  transform: translateY(-50%); /* Center the button vertically */
+  background-color: #ff4b5c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.logout-button:hover {
+  background-color: #e84150;
+}
+
+.logout-button:active {
+  background-color: #c4353f;
+}
