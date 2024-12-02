@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import ForgotPasswordForm from "./ForgotPasswordForm";
-import ResetPasswordForm from "./ResetPasswordForm";
+import LoginForm from "./loginform/LoginForm";
+import RegisterForm from "./registerform/RegisterForm";
+import ForgotPasswordForm from "./forgotpasswordform/ForgotPasswordForm";
+import ResetPasswordForm from "./resetpasswordform/ResetPasswordForm";
 import "./AuthPopup.css";
 
 const AuthPopup = ({ onSuccess }) => {

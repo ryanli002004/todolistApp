@@ -54,6 +54,9 @@ const App = () => {
               <h1 className="header-title">Hi {userName}, Welcome to your To-Do List!</h1>
               <LogoutButton onLogout={handleLogout} />
             </header>
+            <div className="is-auth-content">
+
+            </div>
           </div>
         ) 
         : 
@@ -62,11 +65,14 @@ const App = () => {
             <header className="navbar-not-auth">
               <h1 className="header-title">Welcome to the To-Do List App</h1>
             </header>
-            <AuthPopup
-              onSuccess={(token, name) => {
-                localStorage.setItem("authToken", token); // Save token
-                setIsAuthenticated(true);
-                setUserName(name);}}/>
+            <div className="not-auth-content">
+              <h1 className="please-auth-heading">Please log in or create an account to access your personalized to-do list!</h1>
+              <AuthPopup
+                onSuccess={(token, name) => {
+                  localStorage.setItem("authToken", token); // Save token
+                  setIsAuthenticated(true);
+                  setUserName(name);}}/>
+            </div>
           </div>
         )}
     </div>

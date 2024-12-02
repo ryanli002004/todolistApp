@@ -1,14 +1,15 @@
 .app-container {
-    font-family: Arial, sans-serif;
-    min-height: 100vh; /* Full height for the app */
-    display: flex;
-    flex-direction: column;
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 800px;
-    text-align: center;
-  }
-  
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center child elements horizontally */
+  justify-content: center; /* Center child elements vertically */
+  margin: 0; /* Remove any default margin */
+  padding: 0;
+  text-align: center;
+  position: relative; /* Important for layering */
+}
   .navbar-not-auth {
     display: flex;
     justify-content: center; /* Spread the items across the navbar */
@@ -47,3 +48,29 @@
     font-size: 1.5rem; /* Set a readable font size */
   }
   
+  .is-auth-content {
+    margin-top: 100px; /* Offset to avoid overlapping the navbar */
+    width: 100%;
+    max-width: 800px; /* Limit content width */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.not-auth-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center the modal horizontally */
+  align-items: center; /* Center the modal vertically */
+  height: 100%; /* Ensure it takes full height */
+  width: 100%; /* Ensure it takes full width */
+  position: absolute; /* Absolute to overlay the app container */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.please-auth-heading{
+  display: block;
+  margin-bottom: 50px;
+}

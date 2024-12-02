@@ -1,59 +1,49 @@
-.auth-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .auth-popup {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    position: relative;
-  }
-  
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .auth-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .auth-form input {
-    margin-bottom: 10px;
-    padding: 8px;
-    font-size: 16px;
-  }
-  
-  .auth-form button {
-    padding: 10px;
-    font-size: 16px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .auth-form span {
-    color: #007bff;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
+
+
+
+
+.auth-popup {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.switch-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Adds spacing between buttons */
+}
+
+.switch-links button {
+  background-color: #e0e0e0; /* Neutral background color */
+  color: #333; /* Dark text color */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.switch-links button:hover {
+  background-color: #007bff; /* Highlight on hover */
+  color: white; /* White text for better contrast */
+}
+
+.switch-links button:active {
+  background-color: #0056b3; /* Slightly darker on active */
+}
+
+.switch-links button:focus {
+  outline: 2px solid #007bff; /* Visible focus for accessibility */
+  outline-offset: 2px;
+}

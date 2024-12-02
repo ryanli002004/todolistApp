@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ResetPasswordForm.css";
 
 const ResetPasswordForm = ({ email, onSuccess }) => {
   const [token, setToken] = useState("");
@@ -34,35 +35,37 @@ const ResetPasswordForm = ({ email, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Reset Password</h2>
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <form onSubmit={handleSubmit} className="reset-password-form">
+      <h2 className="form-heading">Reset Password</h2>
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      {error && <p className="error-message">{error}</p>}
 
-      <label>
+      <label className="form-label">
         Email:
-        <input type="email" value={email} readOnly />
+        <input type="email" value={email} readOnly className="form-input" />
       </label>
-      <label>
+      <label className="form-label">
         Token:
         <input
           type="text"
           value={token}
           onChange={(e) => setToken(e.target.value)}
           required
+          className="form-input"
         />
       </label>
-      <label>
+      <label className="form-label">
         New Password:
         <input
           type="password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           required
+          className="form-input"
         />
       </label>
 
-      <button type="submit">Reset Password</button>
+      <button type="submit" className="submit-button">Reset Password</button>
     </form>
   );
 };

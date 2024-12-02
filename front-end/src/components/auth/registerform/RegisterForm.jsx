@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./RegisterForm.css";
 
 const RegisterForm = ({ onSuccess }) => {
   const [name, setName] = useState("");
@@ -43,34 +44,37 @@ const RegisterForm = ({ onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Register</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <label>
+    <form onSubmit={handleSubmit} className="register-form">
+      <h2 className="form-heading">Register</h2>
+      {error && <p className="error-message">{error}</p>}
+      <label className="form-label">
         Name:
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="form-input"
         />
       </label>
-      <label>
+      <label className="form-label">
         Email:
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="form-input"
         />
       </label>
-      <label>
+      <label className="form-label">
         Password:
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="form-input"
         />
       </label>
-      <button type="submit">Register</button>
+      <button type="submit" className="submit-button">Register</button>
     </form>
   );
 };
