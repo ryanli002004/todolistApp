@@ -45,6 +45,7 @@ async function setupDatabase() {
         task VARCHAR(255) NOT NULL,
         completed BOOLEAN NOT NULL DEFAULT false,
         starred BOOLEAN NOT NULL DEFAULT false,
+        position INT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id)
       )
     `);
