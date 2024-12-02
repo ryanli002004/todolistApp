@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path'); // For serving static files
-const { setupDatabase } = require('./setupDatabase');
+const { setupDatabase } = require('./setupdatabase/setupDatabase');
 const authRoutes = require('./routes/authRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 app.use(express.json()); // Parse incoming JSON requests
@@ -14,6 +15,7 @@ const startServer = async () => {
 
     // Add routes for APIs
     app.use('/auth', authRoutes);
+    app.use('/tasks', taskRoutes);
 
     // Serve the React front-end from the "dist" folder
     app.use(express.static(path.join(__dirname, 'dist')));
