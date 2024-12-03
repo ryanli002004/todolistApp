@@ -8,20 +8,22 @@ router.use(authenticate);
 
 // Add a new task
 router.post('/', async (req, res) => {
-  const { task, starred } = req.body;
+  const { task } = req.body;
   const userId = req.user.id; // Retrieved from middleware
-
+  if (!task || task.trim() === "") {
+    return res.status(400).json({ message: 'Task cannot be empty' });
+  }
   try {
     const [result] = await db.query(
       'INSERT INTO tasks (user_id, task, completed, starred, position) VALUES (?, ?, ?, ?, ?)',
-      [userId, task, false, starred || false, 0]
+      [userId, task, false, false, 0]
     );
 
     res.status(201).json({
       id: result.insertId,
       task,
       completed: false,
-      starred: starred || false,
+      starred: false,
       position: 0,
     });
   } catch (err) {
